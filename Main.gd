@@ -134,7 +134,19 @@ func download_cards():
 	
 	for i in range(3):
 		var data = json_buffer[i].result
-		if "card_faces" in data:
+		
+		if "image_uris" in data:
+			var image_uri = data["image_uris"]["large"]
+			
+			download_card_image(image_uri)
+			yield($CardDownload, "request_completed")
+			yield(get_tree().create_timer(0.1), "timeout")
+			
+			var t = []
+			t.append(texture_buffer[-1])
+			
+			card_textures.append(t)
+		elif "card_faces" in data:
 			var front_uri = data["card_faces"][0]["image_uris"]["large"]
 			var back_uri = data["card_faces"][1]["image_uris"]["large"]
 			
@@ -148,17 +160,6 @@ func download_cards():
 			
 			var t = []
 			t.append(texture_buffer[-2])
-			t.append(texture_buffer[-1])
-			
-			card_textures.append(t)
-		elif "image_uris" in data:
-			var image_uri = data["image_uris"]["large"]
-			
-			download_card_image(image_uri)
-			yield($CardDownload, "request_completed")
-			yield(get_tree().create_timer(0.1), "timeout")
-			
-			var t = []
 			t.append(texture_buffer[-1])
 			
 			card_textures.append(t)
