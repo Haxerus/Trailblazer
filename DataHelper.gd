@@ -93,6 +93,39 @@ func get_random_cards(n, allow_dupes):
 	return result
 
 
+func import_deck(deck_name, deck_list):
+	var file = File.new()
+	
+	save_path = "user://saves/%s.tbz" % deck_name
+	if file.file_exists(save_path):
+		var index = 1
+		var modified_path = "user://saves/%s-%s.tbz" % [deck_name, index]
+		
+		while file.file_exists(modified_path):
+			index += 1
+			modified_path = "user://saves/%s-%s.tbz" % [deck_name, index]
+		
+		save_path = modified_path
+	
+	var err = file.open(save_path, File.WRITE)
+	if err != OK:
+		push_error("An error occurred while creating the list file.")
+	
+	var lines = deck_list.split("\n")
+	for i in range(len(lines)):
+		# var count = line.substr(0, 1)
+		var card_name = lines[i].substr(2)
+		
+		if card_name.empty():
+			continue
+		
+		if i < len(lines) - 1:
+			file.store_string(str(card_name, "\n"))
+		else:
+			file.store_string(card_name)
+	
+	file.close()
+
 func new_deck(new_name):	
 	var file = File.new()
 	

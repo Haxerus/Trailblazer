@@ -40,20 +40,20 @@ func _on_ComLoad_pressed():
 
 
 func _on_NewNameDialog_confirmed():
-	if $NewNameDialog/NameVBox/Name.text.empty():
-		$NewNameDialog/NameVBox/Err.show()
+	if $NewNameDialog/VBox/Name.text.empty():
+		$NewNameDialog/VBox/Err.show()
 		return
 	
-	DataHelper.new_deck($NewNameDialog/NameVBox/Name.text)
+	DataHelper.new_deck($NewNameDialog/VBox/Name.text)
 	
-	$NewNameDialog/NameVBox/Err.hide()
+	$NewNameDialog/VBox/Err.hide()
 	$NewNameDialog.hide()
 	
 	emit_signal("new_name_entered")
 
 
 func _on_NewNameDialog_about_to_show():
-	$NewNameDialog/NameVBox/Name.clear()
+	$NewNameDialog/VBox/Name.clear()
 
 
 func _on_LoadDialog_file_selected(path):
@@ -64,3 +64,29 @@ func _on_LoadDialog_file_selected(path):
 
 func _on_LoadDialog_about_to_show():
 	$LoadDialog.set_current_dir("user://saves")
+
+
+func _on_ImportDialog_confirmed():
+	if $ImportDialog/VBox/Name.text.empty():
+		$ImportDialog/VBox/Err.show()
+		return
+	
+	if $ImportDialog/VBox/List.text.empty():
+		$ImportDialog/VBox/Err2.show()
+		return
+	
+	var deck_name = $ImportDialog/VBox/Name.text
+	var deck_list = $ImportDialog/VBox/List.text
+	DataHelper.import_deck(deck_name, deck_list)
+	
+	$ImportDialog/VBox/Err.hide()
+	$ImportDialog/VBox/Err2.hide()
+	$ImportDialog.hide()
+
+
+func _on_ImportDialog_about_to_show():
+	$ImportDialog/VBox/Name.clear()
+
+
+func _on_Import_pressed():
+	$ImportDialog.popup_centered()

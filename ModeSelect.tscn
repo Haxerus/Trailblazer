@@ -121,6 +121,17 @@ margin_right = 165.5
 margin_bottom = 31.0
 text = "Note: Loading a Standard Mode list doesn't work yet"
 
+[node name="Import" type="Button" parent="Controls"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -62.0
+margin_top = -31.0
+margin_right = 62.0
+margin_bottom = -11.0
+text = "Import Collection"
+
 [node name="LoadDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -131,7 +142,7 @@ margin_top = -255.5
 margin_right = 331.5
 margin_bottom = 255.5
 popup_exclusive = true
-window_title = "Load Card List"
+window_title = "Open a File"
 resizable = true
 mode = 0
 access = 1
@@ -151,7 +162,7 @@ window_title = "New Card List"
 resizable = true
 dialog_hide_on_ok = false
 
-[node name="NameVBox" type="VBoxContainer" parent="NewNameDialog"]
+[node name="VBox" type="VBoxContainer" parent="NewNameDialog"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -162,19 +173,19 @@ margin_right = 125.0
 margin_bottom = 21.5
 custom_constants/separation = 8
 
-[node name="NameLabel" type="Label" parent="NewNameDialog/NameVBox"]
+[node name="NameLabel" type="Label" parent="NewNameDialog/VBox"]
 margin_right = 250.0
 margin_bottom = 14.0
 text = "Enter card list name."
 align = 1
 valign = 1
 
-[node name="Name" type="LineEdit" parent="NewNameDialog/NameVBox"]
+[node name="Name" type="LineEdit" parent="NewNameDialog/VBox"]
 margin_top = 22.0
 margin_right = 250.0
 margin_bottom = 46.0
 
-[node name="Err" type="Label" parent="NewNameDialog/NameVBox"]
+[node name="Err" type="Label" parent="NewNameDialog/VBox"]
 visible = false
 margin_top = 54.0
 margin_right = 250.0
@@ -183,11 +194,77 @@ custom_colors/font_color = Color( 0.945098, 0.360784, 0.360784, 1 )
 text = "Name cannot be left blank"
 align = 1
 
+[node name="ImportDialog" type="AcceptDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -182.5
+margin_top = -257.5
+margin_right = 182.5
+margin_bottom = 257.5
+popup_exclusive = true
+window_title = "New Card List"
+resizable = true
+dialog_hide_on_ok = false
+
+[node name="VBox" type="VBoxContainer" parent="ImportDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -174.5
+margin_top = -249.5
+margin_right = 174.5
+margin_bottom = 221.5
+custom_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="ImportDialog/VBox"]
+margin_right = 349.0
+margin_bottom = 14.0
+text = "Enter card list name."
+align = 1
+valign = 1
+
+[node name="Name" type="LineEdit" parent="ImportDialog/VBox"]
+margin_top = 22.0
+margin_right = 349.0
+margin_bottom = 46.0
+
+[node name="Err" type="Label" parent="ImportDialog/VBox"]
+visible = false
+margin_top = 54.0
+margin_right = 349.0
+margin_bottom = 68.0
+custom_colors/font_color = Color( 0.945098, 0.360784, 0.360784, 1 )
+text = "Name cannot be left blank"
+align = 1
+
+[node name="List" type="TextEdit" parent="ImportDialog/VBox"]
+margin_top = 54.0
+margin_right = 349.0
+margin_bottom = 471.0
+size_flags_vertical = 3
+show_line_numbers = true
+
+[node name="Err2" type="Label" parent="ImportDialog/VBox"]
+visible = false
+margin_top = 457.0
+margin_right = 349.0
+margin_bottom = 471.0
+custom_colors/font_color = Color( 0.945098, 0.360784, 0.360784, 1 )
+text = "List cannot be left blank"
+align = 1
+
 [connection signal="pressed" from="Controls/Modes/StandardButtons/StdNew" to="." method="_on_StdNew_pressed"]
 [connection signal="pressed" from="Controls/Modes/StandardButtons/StdLoad" to="." method="_on_StdLoad_pressed"]
 [connection signal="pressed" from="Controls/Modes/CommanderButtons/ComNew" to="." method="_on_ComNew_pressed"]
 [connection signal="pressed" from="Controls/Modes/CommanderButtons/ComLoad" to="." method="_on_ComLoad_pressed"]
+[connection signal="pressed" from="Controls/Import" to="." method="_on_Import_pressed"]
 [connection signal="about_to_show" from="LoadDialog" to="." method="_on_LoadDialog_about_to_show"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_LoadDialog_file_selected"]
 [connection signal="about_to_show" from="NewNameDialog" to="." method="_on_NewNameDialog_about_to_show"]
 [connection signal="confirmed" from="NewNameDialog" to="." method="_on_NewNameDialog_confirmed"]
+[connection signal="about_to_show" from="ImportDialog" to="." method="_on_ImportDialog_about_to_show"]
+[connection signal="confirmed" from="ImportDialog" to="." method="_on_ImportDialog_confirmed"]
