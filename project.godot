@@ -11,10 +11,14 @@ config_version=4
 [application]
 
 config/name="Trailblazer"
-run/main_scene="res://MainAlt.tscn"
+run/main_scene="res://ModeSelect.tscn"
 boot_splash/image="res://images/bg.png"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
+
+[autoload]
+
+DataHelper="*res://DataHelper.gd"
 
 [display]
 
@@ -27,6 +31,10 @@ resiz=false
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[mono]
+
+project/assembly_name="Trailblazer"
 
 [physics]
 

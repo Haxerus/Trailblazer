@@ -1,4 +1,4 @@
 extends Sprite
 
 func _process(delta):
-	rotation += PI / 32.0
+	rotation += 2 * PI * delta

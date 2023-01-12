@@ -33,20 +33,10 @@ func _ready():
 	rarity.add_item("Mythic")
 	rarity.add_item("Special")
 	
-	var set_text = load_sets()
-	for s in set_text:
+	for s in DataHelper.sets:
 		sets.add_item(s)
 	
 	sets.select(0)
-
-func load_sets():
-	var file = File.new()
-	file.open("res://text/sets.txt", File.READ)
-	var content = []
-	while !file.eof_reached():
-		content.append(file.get_line())
-	file.close()
-	return content
 
 func _on_CheckButton_toggled(button_pressed):
 	if button_pressed:
