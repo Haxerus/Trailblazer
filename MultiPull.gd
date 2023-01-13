@@ -18,8 +18,10 @@ var types = ["land", "creature", "instant", "sorcery", "artifact", "enchantment"
 var rarities = ["common", "uncommon", "rare", "mythic", "special"]
 var any_mv = true
 
-var base_query = "-banned:duel -t:basic not:funny not:rebalanced (st:commander or st:core or st:expansion or st:masters or st:draft_innovation or st:starter or st:funny)"
+var base_query = "-t:basic not:funny not:rebalanced (st:commander or st:core or st:expansion or st:masters or st:draft_innovation or st:starter or st:funny)"
 var banned_sets = "-e:one -e:4bb -e:j21 -e:fbb -e:sum"
+var commander_banlist = "-banned:duel"
+var legacy_banlist = "-banned:legacy"
 
 signal card_requests_completed(err)
 signal card_downloads_completed(err)
@@ -133,7 +135,14 @@ func _on_download_completed(_result, _response_code, _headers, body):
 
 
 func build_query():
-	var query = "%s %s" % [base_query, banned_sets]
+	var banlist : String
+	match DataHelper.get_mode():
+		DataHelper.Mode.STANDARD:
+			banlist = legacy_banlist
+		DataHelper.Mode.COMMANDER:
+			banlist = commander_banlist
+	
+	var query = "%s %s %s" % [base_query, banned_sets, banlist]
 	
 	if DataHelper.get_mode() == DataHelper.Mode.COMMANDER:
 		if legendary.pressed:
