@@ -10,7 +10,6 @@ var mode = Mode.STANDARD
 var save_path : String
 
 var sets : Array
-var set_codes : Array
 
 var card_objects = []
 var collection = []
@@ -19,7 +18,6 @@ func _ready():
 	randomize()
 	make_save_dir()
 	sets = load_sets()
-	set_codes = load_set_codes()
 
 
 func _notification(what):
@@ -197,19 +195,9 @@ func make_save_dir():
 
 func load_sets():
 	var file = File.new()
-	file.open("res://text/sets.txt", File.READ)
+	file.open("res://text/setlist.txt", File.READ)
 	var content = []
 	while !file.eof_reached():
-		content.append(file.get_line())
-	file.close()
-	return content
-
-
-func load_set_codes():
-	var file = File.new()
-	file.open("res://text/set_codes.txt", File.READ)
-	var content = []
-	while !file.eof_reached():
-		content.append(file.get_line())
+		content.append(file.get_line().split("\t"))
 	file.close()
 	return content

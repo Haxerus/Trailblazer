@@ -33,8 +33,9 @@ func _ready():
 	rarity.add_item("Mythic")
 	rarity.add_item("Special")
 	
+	sets.add_item("Any Set")
 	for s in DataHelper.sets:
-		sets.add_item(s)
+		sets.add_item(s[0])
 	
 	sets.select(0)
 

@@ -19,7 +19,7 @@ var rarities = ["common", "uncommon", "rare", "mythic", "special"]
 var any_mv = true
 
 var base_query = "-t:basic not:funny not:rebalanced (st:commander or st:core or st:expansion or st:masters or st:draft_innovation or st:starter or st:funny)"
-var banned_sets = "-e:one -e:4bb -e:j21 -e:fbb -e:sum"
+var banned_sets = "-e:4bb -e:j21 -e:fbb -e:sum"
 var commander_banlist = "-banned:duel"
 var legacy_banlist = "-banned:legacy"
 
@@ -28,9 +28,7 @@ signal card_downloads_completed(err)
 signal texture_downloaded(texture)
 
 func _ready():
-# warning-ignore:return_value_discarded
 	$Scryfall.connect("request_completed", self, "_on_request_completed")
-# warning-ignore:return_value_discarded
 	$CardDownload.connect("request_completed", self, "_on_download_completed")
 	update_card_history()
 	
@@ -166,7 +164,7 @@ func build_query():
 		query = "%s %s" % [query, r]
 	
 	if !sets.get_selected_items().empty() and sets.get_selected_items()[0] != 0:
-		var e = "e:%s" % DataHelper.set_codes[sets.get_selected_items()[0] - 1]
+		var e = "e:%s" % DataHelper.sets[sets.get_selected_items()[0] - 1][1]
 		query = "%s %s" % [query, e]
 	
 	return query
@@ -271,5 +269,6 @@ func _on_ClearHistory_pressed():
 
 func _on_MainMenu_pressed():
 	DataHelper.save_deck()
-	get_node("/root/MultiPull").queue_free()
 	get_node("/root/ModeSelect").show()
+	hide()
+	get_node("/root/MultiPull").queue_free()

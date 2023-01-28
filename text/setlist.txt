@@ -1,0 +1,180 @@
+Adventures in the Forgotten Realms	AFR
+Aether Revolt	AER
+Alara Reborn	ARB
+Alliances	ALL
+Amonkhet	AKH
+Amonkhet Remastered	AKR
+Antiquities	ATQ
+Apocalypse	APC
+Arabian Nights	ARN
+Avacyn Restored	AVR
+Battle for Zendikar	BFZ
+Battlebond	BBD
+Betrayers of Kamigawa	BOK
+Born of the Gods	BNG
+Champions of Kamigawa	CHK
+Chronicles	CHR
+Classic Sixth Edition	6ED
+Coldsnap	CSP
+Commander 2011	CMD
+Commander 2013	C13
+Commander 2014	C14
+Commander 2015	C15
+Commander 2016	C16
+Commander 2017	C17
+Commander 2018	C18
+Commander 2019	C19
+Commander 2020	C20
+Commander 2021	C21
+Commander Legends	CMR
+Commander Legends: Battle for Baldur’s Gate	CLB
+Conflux	CON
+Conspiracy	CNS
+Conspiracy: Take the Crown	CN2
+Core Set 2019	M19
+Core Set 2020	M20
+Core Set 2021	M21
+Crimson Vow Commander	VOC
+Dark Ascension	DKA
+Darksteel	DST
+Dissension	DIS
+Dominaria	DOM
+Dominaria Remastered	DMR
+Dominaria United	DMU
+Dominaria United Commander	DMC
+Double Masters	2XM
+Double Masters 2022	2X2
+Dragons of Tarkir	DTK
+Dragon’s Maze	DGM
+Eighth Edition	8ED
+Eldritch Moon	EMN
+Eternal Masters	EMA
+Eventide	EVE
+Exodus	EXO
+Fallen Empires	FEM
+Fate Reforged	FRF
+Fifth Dawn	5DN
+Fifth Edition	5ED
+Forgotten Realms Commander	AFC
+Fourth Edition	4ED
+Future Sight	FUT
+Gatecrash	GTC
+Guildpact	GPT
+Guilds of Ravnica	GRN
+Heads I win, Tails You Lose	PHED
+Homelands	HML
+Hour of Devastation	HOU
+Ice Age 	ICE
+Iconic Masters	IMA
+Ikoria: Lair of Behemoths	IKO
+Innistrad	ISD
+Innistrad: Crimson Vow	VOW
+Innistrad: Midnight Hunt	MID
+Invasion	INV
+Ixalan	XLN
+Journey into Nyx	JOU
+Judgment	JUD
+Jumpstart	JMP
+Jumpstart 2022	J22
+Kaladesh	KLD
+Kaladesh Remastered	KLR
+Kaldheim	KHM
+Kaldheim Commander	KHC
+Kamigawa: Neon Dynasty	NEO
+Khans of Tarkir	KTK
+Legends	LEG
+Legions 	LGN
+Limited Edition Alpha	LEA
+Limited Edition Beta	LEB
+Lorwyn	LRW
+Magic 2010	M10
+Magic 2011	M11
+Magic 2012	M12
+Magic 2013	M13
+Magic 2014	M14
+Magic 2015	M15
+Magic Origins	ORI
+Masters 25	A25
+Masters Edition	ME1
+Masters Edition II	ME2
+Masters Edition III	ME3
+Masters Edition IV	ME4
+Mercadian Masques	MMQ
+Midnight Hunt Commander	MIC
+Mirage	MIR
+Mirrodin	MRD
+Mirrodin Besieged	MBS
+Modern Horizons	MH1
+Modern Horizons 1 Timeshifts	H1R
+Modern Horizons 2	MH2
+Modern Masters	MMA
+Modern Masters 2015	MM2
+Modern Masters 2017	MM3
+Morningtide	MOR
+Mystery Booster	MB1
+Nemesis	NEM
+Neon Dynasty Commander	NEC
+New Phyrexia	NPH
+Ninth Edition	9ED
+Oath of the Gatewatch	OGW
+Odyssey	ODY
+Onslaught	ONS
+Phyrexia: All Will Be One	ONE
+Phyrexia: All Will Be One Commander	ONC
+Planar Chaos	PLC
+Planechase	HOP
+Planechase 2012	PC2
+Planechase Anthology	PCA
+Planeshift	PLS
+Portal	POR
+Portal Second Age	P02
+Portal Three Kingdoms	PTK
+Prophecy	PCY
+Ravnica Allegiance	RNA
+Ravnica: City of Guilds	RAV
+Return to Ravnica	RTR
+Revised Edition	3ED
+Rise of the Eldrazi	ROE
+Rivals of Ixalan	RIX
+Saviors of Kamigawa	SOK
+Scars of Mirrodin	SOM
+Scourge	SCG
+Seventh Edition	7ED
+Shadowmoor	SHM
+Shadows over Innistrad	SOI
+Shards of Alara	ALA
+Starter 1999	S99
+Streets of New Capenna	SNC
+Streets of New Capenna Commander	NCC
+Strixhaven: School of Mages	STX
+Stronghold	STH
+Tempest	TMP
+Tempest Remastered	TPR
+Tenth Edition	10E
+The Brothers’ War	BRO
+The Brothers’ War Commander	BRC
+The Dark	DRK
+The List	PLIST
+Theros	THS
+Theros Beyond Death	THB
+Throne of Eldraine	ELD
+Time Spiral	TSP
+Time Spiral Remastered	TSR
+Time Spiral Timeshifted	TSB
+Torment	TOR
+Ultimate Masters	UMA
+Unfinity	UNF
+Universes Within	SLX
+Unlimited Edition	2ED
+Urza’s Destiny	UDS
+Urza’s Legacy	ULG
+Urza’s Saga	USG
+Vintage Masters	VMA
+Visions	VIS
+War of the Spark	WAR
+Warhammer 40,000 Commander	40K
+Weatherlight	WTH
+Worldwake	WWK
+Zendikar	ZEN
+Zendikar Rising	ZNR
+Zendikar Rising Commander	ZNC
