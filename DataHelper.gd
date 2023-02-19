@@ -1,15 +1,17 @@
 extends Node
 
 enum Mode {
-	STANDARD, 
+	MODERN,
+	LEGACY, 
 	COMMANDER
 }
 
-var mode = Mode.STANDARD
+var mode = Mode.MODERN
 
 var save_path : String
 
 var sets : Array
+var modern_sets : Array
 
 var card_objects = []
 var collection = []
@@ -17,7 +19,8 @@ var collection = []
 func _ready():
 	randomize()
 	make_save_dir()
-	sets = load_sets()
+	sets = load_sets("res://text/setlist.txt")
+	modern_sets = load_sets("res://text/setlist_modern.txt")
 
 
 func _notification(what):
@@ -25,12 +28,24 @@ func _notification(what):
 		save_deck()
 
 
-func set_mode(m):
-	mode = m
+func set_mode(mode_string):
+	match mode_string:
+		"Modern":
+			mode = Mode.MODERN
+		"Legacy":
+			mode = Mode.LEGACY
+		"Duel Commander":
+			mode = Mode.COMMANDER
 
 
 func get_mode():
 	return mode
+
+func get_sets():
+	if mode == Mode.MODERN:
+		return modern_sets
+	
+	return sets
 
 func clear_card_objects():
 	card_objects.clear()
@@ -91,7 +106,7 @@ func get_random_cards(n, allow_dupes):
 	return result
 
 
-func import_deck(deck_name, deck_list):
+func import_deck(deck_name, deck_list, format):
 	var file = File.new()
 	
 	save_path = "user://saves/%s.tbz" % deck_name
@@ -108,6 +123,8 @@ func import_deck(deck_name, deck_list):
 	var err = file.open(save_path, File.WRITE)
 	if err != OK:
 		push_error("An error occurred while creating the list file.")
+	
+	file.store_string(str(format, "\n"))
 	
 	var lines = deck_list.split("\n")
 	for i in range(len(lines)):
@@ -158,6 +175,21 @@ func load_deck(path):
 	
 	var text = file.get_as_text()
 	var tokens = text.split("\n")
+	
+	var format = tokens[0]
+	match format:
+		"Modern":
+			tokens.remove(0)
+			set_mode(format)
+		"Legacy":
+			tokens.remove(0)
+			set_mode(format)
+		"Duel Commander":
+			tokens.remove(0)
+			set_mode(format)
+		_:
+			set_mode("Legacy")
+	
 	for t in tokens:
 		if !t.empty():
 			add_to_collection(t)
@@ -171,6 +203,17 @@ func save_deck():
 	var err = file.open(save_path, File.WRITE)
 	if err != OK:
 		push_error("An error occurred while opening the list file.")
+	
+	var format : String
+	match mode:
+		Mode.MODERN:
+			format = "Modern"
+		Mode.LEGACY:
+			format = "Legacy"
+		Mode.COMMANDER:
+			format = "Duel Commander"
+	
+	file.store_string(str(format, "\n"))
 	
 	var text = ""
 	
@@ -193,9 +236,9 @@ func make_save_dir():
 		push_error("An error occured while trying to access the user file path")
 
 
-func load_sets():
+func load_sets(path):
 	var file = File.new()
-	file.open("res://text/setlist.txt", File.READ)
+	file.open(path, File.READ)
 	var content = []
 	while !file.eof_reached():
 		content.append(file.get_line().split("\t"))

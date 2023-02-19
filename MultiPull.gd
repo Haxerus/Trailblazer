@@ -7,6 +7,8 @@ onready var rarity = get_node("Controls/Grid/Rarity")
 onready var sets = get_node("Controls/SetContainer/SetList")
 onready var legendary = get_node("Controls/Legendary")
 
+onready var setlist = DataHelper.get_sets()
+
 var num_cards = 3
 var cards = []
 var card_sprites = []
@@ -18,12 +20,10 @@ var types = ["land", "creature", "instant", "sorcery", "artifact", "enchantment"
 var rarities = ["common", "uncommon", "rare", "mythic", "special"]
 var any_mv = true
 
-var banlist = ["Library of Alexandria", "Dark Depths"]
+var custom_banlist = ["Library of Alexandria", "Dark Depths"]
 
 var base_query = "-t:basic not:funny not:rebalanced (st:commander or st:core or st:expansion or st:masters or st:draft_innovation or st:starter or st:funny)"
 var banned_sets = "-e:4bb -e:j21 -e:fbb -e:sum"
-var commander_banlist = "-banned:duel"
-var legacy_banlist = "-banned:legacy"
 
 signal card_requests_completed(err)
 signal card_downloads_completed(err)
@@ -35,10 +35,10 @@ func _ready():
 	update_card_history()
 	
 	match DataHelper.get_mode():
-		DataHelper.Mode.STANDARD:
-			legendary.hide()
 		DataHelper.Mode.COMMANDER:
 			legendary.show()
+		_:
+			legendary.hide()
 
 
 func _on_button_pressed():
@@ -56,11 +56,10 @@ func _on_button_pressed():
 		return
 	
 	match DataHelper.get_mode():
-		DataHelper.Mode.STANDARD:
-			cards = DataHelper.get_random_cards(num_cards, true)
 		DataHelper.Mode.COMMANDER:
 			cards = DataHelper.get_random_cards(num_cards, false)
-	
+		_:
+			cards = DataHelper.get_random_cards(num_cards, true)
 	
 	if cards.empty():
 		$Controls/Fail2.visible = true
@@ -92,7 +91,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 		var card_list = json.result["data"]
 		
 		for card in card_list:
-			if card["name"] in banlist:
+			if card["name"] in custom_banlist:
 				continue
 			
 			var card_obj = {}
@@ -141,10 +140,12 @@ func _on_download_completed(_result, _response_code, _headers, body):
 func build_query():
 	var banlist : String
 	match DataHelper.get_mode():
-		DataHelper.Mode.STANDARD:
-			banlist = legacy_banlist
+		DataHelper.Mode.MODERN:
+			banlist = "-banned:modern"
+		DataHelper.Mode.LEGACY:
+			banlist = "-banned:legacy"
 		DataHelper.Mode.COMMANDER:
-			banlist = commander_banlist
+			banlist = "-banned:duel"
 	
 	var query = "%s %s %s" % [base_query, banned_sets, banlist]
 	
@@ -170,7 +171,7 @@ func build_query():
 		query = "%s %s" % [query, r]
 	
 	if !sets.get_selected_items().empty() and sets.get_selected_items()[0] != 0:
-		var e = "e:%s" % DataHelper.sets[sets.get_selected_items()[0] - 1][1]
+		var e = "e:%s" % setlist[sets.get_selected_items()[0] - 1][1]
 		query = "%s %s" % [query, e]
 	
 	return query

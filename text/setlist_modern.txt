@@ -1,0 +1,83 @@
+Adventures in the Forgotten Realms	AFR
+Aether Revolt	AER
+Alara Reborn	ARB
+Amonkhet	AKH
+Avacyn Restored	AVR
+Battle for Zendikar	BFZ
+Betrayers of Kamigawa	BOK
+Born of the Gods	BNG
+Champions of Kamigawa	CHK
+Coldsnap	CSP
+Conflux	CON
+Core Set 2019	M19
+Core Set 2020	M20
+Core Set 2021	M21
+Dark Ascension	DKA
+Darksteel	DST
+Dissension	DIS
+Dominaria	DOM
+Dominaria United	DMU
+Dragons of Tarkir	DTK
+Dragon’s Maze	DGM
+Eighth Edition	8ED
+Eldritch Moon	EMN
+Eventide	EVE
+Fate Reforged	FRF
+Fifth Dawn	5DN
+Future Sight	FUT
+Gatecrash	GTC
+Guildpact	GPT
+Guilds of Ravnica	GRN
+Hour of Devastation	HOU
+Ikoria: Lair of Behemoths	IKO
+Innistrad	ISD
+Innistrad: Crimson Vow	VOW
+Innistrad: Midnight Hunt	MID
+Ixalan	XLN
+Journey into Nyx	JOU
+Kaladesh	KLD
+Kaldheim	KHM
+Kamigawa: Neon Dynasty	NEO
+Khans of Tarkir	KTK
+Lorwyn	LRW
+Magic 2010	M10
+Magic 2011	M11
+Magic 2012	M12
+Magic 2013	M13
+Magic 2014	M14
+Magic 2015	M15
+Magic Origins	ORI
+Mirrodin	MRD
+Mirrodin Besieged	MBS
+Modern Horizons	MH1
+Modern Horizons 2	MH2
+Modern Masters	MMA
+Modern Masters 2015	MM2
+Modern Masters 2017	MM3
+Morningtide	MOR
+New Phyrexia	NPH
+Ninth Edition	9ED
+Oath of the Gatewatch	OGW
+Phyrexia: All Will Be One	ONE
+Planar Chaos	PLC
+Ravnica Allegiance	RNA
+Ravnica: City of Guilds	RAV
+Return to Ravnica	RTR
+Rise of the Eldrazi	ROE
+Rivals of Ixalan	RIX
+Saviors of Kamigawa	SOK
+Scars of Mirrodin	SOM
+Shadows over Innistrad	SOI
+Shards of Alara	ALA
+Streets of New Capenna	SNC
+Strixhaven: School of Mages	STX
+Tenth Edition	10E
+The Brothers’ War	BRO
+Theros	THS
+Theros Beyond Death	THB
+Throne of Eldraine	ELD
+Time Spiral	TSP
+War of the Spark	WAR
+Worldwake	WWK
+Zendikar	ZEN
+Zendikar Rising	ZNR
