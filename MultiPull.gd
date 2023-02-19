@@ -18,6 +18,8 @@ var types = ["land", "creature", "instant", "sorcery", "artifact", "enchantment"
 var rarities = ["common", "uncommon", "rare", "mythic", "special"]
 var any_mv = true
 
+var banlist = ["Library of Alexandria", "Dark Depths"]
+
 var base_query = "-t:basic not:funny not:rebalanced (st:commander or st:core or st:expansion or st:masters or st:draft_innovation or st:starter or st:funny)"
 var banned_sets = "-e:4bb -e:j21 -e:fbb -e:sum"
 var commander_banlist = "-banned:duel"
@@ -59,6 +61,7 @@ func _on_button_pressed():
 		DataHelper.Mode.COMMANDER:
 			cards = DataHelper.get_random_cards(num_cards, false)
 	
+	
 	if cards.empty():
 		$Controls/Fail2.visible = true
 		$Controls/GetCard.disabled = false
@@ -89,6 +92,9 @@ func _on_request_completed(_result, response_code, _headers, body):
 		var card_list = json.result["data"]
 		
 		for card in card_list:
+			if card["name"] in banlist:
+				continue
+			
 			var card_obj = {}
 			card_obj["name"] = card["name"]
 			
