@@ -71,6 +71,9 @@ func _on_ImportDialog_confirmed():
 	
 	var deck_name = $ImportDialog/VBox/Name.text
 	var deck_list = $ImportDialog/VBox/List.text
+	
+	
+	
 	DataHelper.import_deck(deck_name, deck_list, formats[format2.selected])
 	
 	$ImportDialog/VBox/Err.hide()

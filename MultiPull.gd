@@ -141,7 +141,7 @@ func build_query():
 	var banlist : String
 	match DataHelper.get_mode():
 		DataHelper.Mode.MODERN:
-			banlist = "-banned:modern"
+			banlist = "f:modern -banned:modern"
 		DataHelper.Mode.LEGACY:
 			banlist = "-banned:legacy"
 		DataHelper.Mode.COMMANDER:

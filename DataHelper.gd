@@ -128,7 +128,7 @@ func import_deck(deck_name, deck_list, format):
 	
 	var lines = deck_list.split("\n")
 	for i in range(len(lines)):
-		# var count = line.substr(0, 1)
+		# var count = lines[i].substr(0, 1)
 		var card_name = lines[i].substr(2)
 		
 		if card_name.empty():
