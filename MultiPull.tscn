@@ -32,9 +32,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -296.5
-margin_top = -225.5
+margin_top = -246.5
 margin_right = 296.5
-margin_bottom = 225.5
+margin_bottom = 246.5
 script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="Controls"]
@@ -45,17 +45,17 @@ color = Color( 0.137255, 0.137255, 0.137255, 0.784314 )
 [node name="GetCard" type="Button" parent="Controls"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 86.5
-margin_top = -177.5
-margin_right = 171.5
-margin_bottom = -152.5
+margin_left = 89.5
+margin_top = -169.5
+margin_right = 174.5
+margin_bottom = -144.5
 text = "Get Card"
 
 [node name="Grid" type="GridContainer" parent="Controls"]
 margin_left = 22.0
-margin_top = 64.0
-margin_right = 235.0
-margin_bottom = 225.0
+margin_top = 87.0
+margin_right = 237.0
+margin_bottom = 248.0
 custom_constants/vseparation = 20
 custom_constants/hseparation = 8
 columns = 2
@@ -174,10 +174,10 @@ align = 1
 
 [node name="Fail" type="Label" parent="Controls"]
 visible = false
-margin_left = 26.5
-margin_top = 309.5
-margin_right = 234.5
-margin_bottom = 357.5
+margin_left = 28.5
+margin_top = 354.5
+margin_right = 236.5
+margin_bottom = 402.5
 custom_colors/font_color = Color( 1, 0.403922, 0.403922, 1 )
 text = "Card request failed"
 align = 1
@@ -185,10 +185,10 @@ autowrap = true
 
 [node name="Fail2" type="Label" parent="Controls"]
 visible = false
-margin_left = 26.5
-margin_top = 309.5
-margin_right = 234.5
-margin_bottom = 357.5
+margin_left = 27.5
+margin_top = 354.5
+margin_right = 235.5
+margin_bottom = 402.5
 custom_colors/font_color = Color( 1, 0.403922, 0.403922, 1 )
 text = "No valid cards found"
 align = 1
@@ -196,11 +196,20 @@ autowrap = true
 
 [node name="CardHistoryToggle" type="CheckButton" parent="Controls"]
 margin_left = 41.5
-margin_top = 368.5
+margin_top = 400.5
 margin_right = 236.5
-margin_bottom = 408.5
+margin_bottom = 440.5
 pressed = true
 text = "Show Card History"
+
+[node name="BanlistToggle" type="CheckButton" parent="Controls"]
+visible = false
+margin_left = 22.5
+margin_top = 338.5
+margin_right = 236.5
+margin_bottom = 378.5
+pressed = true
+text = "Show Custom Banlist"
 
 [node name="CardHistory" type="TextEdit" parent="Controls"]
 anchor_left = 1.0
@@ -208,11 +217,48 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = 24.5
-margin_top = -300.0
-margin_right = 215.5
+margin_top = -280.0
+margin_right = 214.5
 margin_bottom = 300.0
 readonly = true
 show_line_numbers = true
+
+[node name="Banlist" type="TextEdit" parent="Controls"]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -215.5
+margin_top = -280.0
+margin_right = -25.5
+margin_bottom = 300.0
+show_line_numbers = true
+
+[node name="BanlistLabel" type="Label" parent="Controls"]
+visible = false
+anchor_left = -0.204
+anchor_top = -0.116
+anchor_right = -0.204
+anchor_bottom = -0.116
+margin_left = -48.528
+margin_top = -17.184
+margin_right = 48.472
+margin_bottom = -3.184
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Custom Banlist"
+align = 1
+
+[node name="HistoryLabel" type="Label" parent="Controls"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 74.5
+margin_top = -296.0
+margin_right = 171.5
+margin_bottom = -282.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Card History"
+align = 1
 
 [node name="ClearHistory" type="Button" parent="Controls"]
 visible = false
@@ -223,10 +269,10 @@ margin_bottom = 435.5
 text = "Clear History"
 
 [node name="Legendary" type="CheckBox" parent="Controls"]
-margin_left = 73.5
-margin_top = 220.5
-margin_right = 182.5
-margin_bottom = 244.5
+margin_left = 79.5
+margin_top = 247.5
+margin_right = 188.5
+margin_bottom = 271.5
 text = "Is Legendary"
 
 [node name="MainMenu" type="Button" parent="Controls"]
@@ -237,6 +283,16 @@ margin_top = 8.5
 margin_right = -6.5
 margin_bottom = 28.5
 text = "Main Menu"
+
+[node name="InfoLabel" type="Label" parent="Controls"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -94.0
+margin_top = 38.5
+margin_right = 96.0
+margin_bottom = 52.5
+text = "Format: ?"
+align = 1
 
 [node name="CardSelection" type="Control" parent="."]
 visible = false
@@ -278,7 +334,7 @@ text = "Take Card"
 
 [node name="Spinner" type="Sprite" parent="."]
 visible = false
-position = Vector2( 409, 362 )
+position = Vector2( 410, 391 )
 scale = Vector2( 0.163125, 0.163125 )
 texture = ExtResource( 2 )
 script = ExtResource( 4 )
@@ -287,6 +343,7 @@ script = ExtResource( 4 )
 [connection signal="toggled" from="Controls/Grid/ManaControls/CheckButton" to="." method="_on_CheckButton_toggled"]
 [connection signal="toggled" from="Controls/Grid/ManaControls/CheckButton" to="Controls" method="_on_CheckButton_toggled"]
 [connection signal="toggled" from="Controls/CardHistoryToggle" to="." method="_on_CardHistoryToggle_toggled"]
+[connection signal="toggled" from="Controls/BanlistToggle" to="." method="_on_BanlistToggle_toggled"]
 [connection signal="pressed" from="Controls/ClearHistory" to="." method="_on_ClearHistory_pressed"]
 [connection signal="pressed" from="Controls/MainMenu" to="." method="_on_MainMenu_pressed"]
 [connection signal="pressed" from="CardSelection/Take1" to="." method="_on_Take1_pressed"]

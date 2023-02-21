@@ -6,6 +6,7 @@ onready var type = get_node("Controls/Grid/Type")
 onready var rarity = get_node("Controls/Grid/Rarity")
 onready var sets = get_node("Controls/SetContainer/SetList")
 onready var legendary = get_node("Controls/Legendary")
+onready var info = get_node("Controls/InfoLabel")
 
 onready var setlist = DataHelper.get_sets()
 
@@ -20,8 +21,6 @@ var types = ["land", "creature", "instant", "sorcery", "artifact", "enchantment"
 var rarities = ["common", "uncommon", "rare", "mythic", "special"]
 var any_mv = true
 
-var custom_banlist = ["Library of Alexandria", "Dark Depths"]
-
 var base_query = "-t:basic not:funny not:rebalanced (st:commander or st:core or st:expansion or st:masters or st:draft_innovation or st:starter or st:funny)"
 var banned_sets = "-e:4bb -e:j21 -e:fbb -e:sum"
 
@@ -34,11 +33,26 @@ func _ready():
 	$CardDownload.connect("request_completed", self, "_on_download_completed")
 	update_card_history()
 	
+	var info_text : String = "Format:"
+	
 	match DataHelper.get_mode():
+		DataHelper.Mode.MODERN:
+			legendary.hide()
+			info_text = "%s %s" % [info_text, "Modern"]
+		DataHelper.Mode.LEGACY:
+			legendary.hide()
+			info_text = "%s %s" % [info_text, "Legacy"]
 		DataHelper.Mode.COMMANDER:
 			legendary.show()
+			info_text = "%s %s" % [info_text, "Duel Commander"]
 		_:
+			info_text = "%s %s" % [info_text, "???"]
 			legendary.hide()
+	
+	if DataHelper.is_singleton():
+		info_text = "%s %s" % [info_text, "Singleton"]
+	
+	info.set_text(info_text)
 
 
 func _on_button_pressed():
@@ -59,7 +73,10 @@ func _on_button_pressed():
 		DataHelper.Mode.COMMANDER:
 			cards = DataHelper.get_random_cards(num_cards, false)
 		_:
-			cards = DataHelper.get_random_cards(num_cards, true)
+			if DataHelper.is_singleton():
+				cards = DataHelper.get_random_cards(num_cards, false)
+			else:
+				cards = DataHelper.get_random_cards(num_cards, true)
 	
 	if cards.empty():
 		$Controls/Fail2.visible = true
@@ -91,7 +108,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 		var card_list = json.result["data"]
 		
 		for card in card_list:
-			if card["name"] in custom_banlist:
+			if card["name"] in DataHelper.custom_banlist:
 				continue
 			
 			var card_obj = {}
@@ -250,6 +267,12 @@ func _on_card_revealed(id):
 
 func _on_CardHistoryToggle_toggled(button_pressed):
 	$Controls/CardHistory.visible = button_pressed
+	$Controls/HistoryLabel.visible = button_pressed
+
+
+func _on_BanlistToggle_toggled(button_pressed):
+	$Controls/Banlist.visible = button_pressed
+	$Controls/BanlistLabel.visible = button_pressed
 
 
 func _on_Take1_pressed():
@@ -279,3 +302,4 @@ func _on_MainMenu_pressed():
 	get_node("/root/ModeSelect").show()
 	hide()
 	get_node("/root/MultiPull").queue_free()
+

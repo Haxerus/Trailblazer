@@ -6,7 +6,10 @@ enum Mode {
 	COMMANDER
 }
 
+const HEADER_FIELDS = 2
+
 var mode = Mode.MODERN
+var singleton = false
 
 var save_path : String
 
@@ -15,6 +18,8 @@ var modern_sets : Array
 
 var card_objects = []
 var collection = []
+
+var custom_banlist = ["Dark Depths", "Library of Alexandria"]
 
 func _ready():
 	randomize()
@@ -28,7 +33,7 @@ func _notification(what):
 		save_deck()
 
 
-func set_mode(mode_string):
+func set_mode(mode_string, s):
 	match mode_string:
 		"Modern":
 			mode = Mode.MODERN
@@ -36,10 +41,74 @@ func set_mode(mode_string):
 			mode = Mode.LEGACY
 		"Duel Commander":
 			mode = Mode.COMMANDER
+	
+	singleton = s
 
 
 func get_mode():
 	return mode
+
+func is_singleton():
+	return singleton
+
+func validate_list(deck_list):
+	var regex = RegEx.new()
+	regex.compile("^\\d (\\w[, /']*)+")
+	
+	var lines = deck_list.split("\n")
+	for line in lines:
+		var result = regex.search(line)
+		if result:
+			print(result.get_string())
+		else:
+			return false
+	
+	return true
+
+func save_header():
+	var single = "Singleton" if singleton else "NonSingleton"
+	
+	var format : String
+	match mode:
+		Mode.MODERN:
+			format = "Modern"
+		Mode.LEGACY:
+			format = "Legacy"
+		Mode.COMMANDER :
+			format = "Duel Commander"
+	
+	return "%s,%s" % [format, single]
+ 
+func load_header(header):
+	var fields = header.split(",")
+	var format : String = ""
+	var single : bool = false
+	
+	if len(fields) != HEADER_FIELDS:
+		set_mode("Legacy", false)
+		return false
+	
+	# Format
+	match fields[0]:
+		"Modern":
+			format = "Modern"
+		"Legacy":
+			format = "Legacy"
+		"Duel Commander":
+			format = "Duel Commander"
+		_:
+			set_mode("Legacy", false)
+			return false
+	
+	match fields[1]:
+		"Singleton":
+			single = true
+		_:
+			single = false
+	
+	set_mode(format, single)
+	
+	return true
 
 func get_sets():
 	if mode == Mode.MODERN:
@@ -106,7 +175,7 @@ func get_random_cards(n, allow_dupes):
 	return result
 
 
-func import_deck(deck_name, deck_list, format):
+func import_deck(deck_name, deck_list, format, s):
 	var file = File.new()
 	
 	save_path = "user://saves/%s.tbz" % deck_name
@@ -124,26 +193,37 @@ func import_deck(deck_name, deck_list, format):
 	if err != OK:
 		push_error("An error occurred while creating the list file.")
 	
-	file.store_string(str(format, "\n"))
+	var single = "Singleton" if singleton else "NonSingleton"
+	
+	var header : String
+	header = "%s,%s\n" % [format, single]
+	file.store_string(header)
 	
 	var lines = deck_list.split("\n")
 	for i in range(len(lines)):
-		# var count = lines[i].substr(0, 1)
+		var count = int(lines[i].substr(0, 1))
 		var card_name = lines[i].substr(2)
 		
 		if card_name.empty():
 			continue
 		
 		if i < len(lines) - 1:
-			file.store_string(str(card_name, "\n"))
+			for j in range(count):
+				file.store_string(str(card_name, "\n"))
 		else:
-			file.store_string(card_name)
+			for j in range(count):
+				if j < count - 1:
+					file.store_string(str(card_name, "\n"))
+				else:
+					file.store_string(card_name)
 	
 	file.close()
 
-func new_deck(new_name):	
-	var file = File.new()
+func new_deck(new_name):
+	collection.clear()
 	
+	var file = File.new()
+
 	save_path = "user://saves/%s.tbz" % new_name
 	if file.file_exists(save_path):
 		var index = 1
@@ -163,6 +243,8 @@ func new_deck(new_name):
 
 
 func load_deck(path):
+	collection.clear()
+	
 	save_path = path
 	
 	var file = File.new()
@@ -171,24 +253,13 @@ func load_deck(path):
 	if err != OK:
 		push_error("An error occurred while opening the list file.")
 	
-	collection.clear()
+	
 	
 	var text = file.get_as_text()
 	var tokens = text.split("\n")
 	
-	var format = tokens[0]
-	match format:
-		"Modern":
-			tokens.remove(0)
-			set_mode(format)
-		"Legacy":
-			tokens.remove(0)
-			set_mode(format)
-		"Duel Commander":
-			tokens.remove(0)
-			set_mode(format)
-		_:
-			set_mode("Legacy")
+	var header = load_header(tokens[0])
+	tokens.remove(0)
 	
 	for t in tokens:
 		if !t.empty():
@@ -204,16 +275,7 @@ func save_deck():
 	if err != OK:
 		push_error("An error occurred while opening the list file.")
 	
-	var format : String
-	match mode:
-		Mode.MODERN:
-			format = "Modern"
-		Mode.LEGACY:
-			format = "Legacy"
-		Mode.COMMANDER:
-			format = "Duel Commander"
-	
-	file.store_string(str(format, "\n"))
+	file.store_string(str(save_header(), "\n"))
 	
 	var text = ""
 	

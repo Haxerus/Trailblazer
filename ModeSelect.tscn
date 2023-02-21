@@ -120,9 +120,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -133.0
-margin_top = -64.0
+margin_top = -86.0
 margin_right = 133.0
-margin_bottom = 74.0
+margin_bottom = 86.0
 popup_exclusive = true
 window_title = "New Card List"
 resizable = true
@@ -134,9 +134,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -125.0
-margin_top = -61.0
+margin_top = -78.0
 margin_right = 125.0
-margin_bottom = 33.0
+margin_bottom = 50.0
 custom_constants/separation = 8
 
 [node name="NameLabel" type="Label" parent="NewNameDialog/VBox"]
@@ -152,16 +152,27 @@ margin_right = 250.0
 margin_bottom = 46.0
 
 [node name="Format" type="OptionButton" parent="NewNameDialog/VBox"]
+margin_left = 62.0
 margin_top = 54.0
-margin_right = 250.0
+margin_right = 187.0
 margin_bottom = 74.0
+rect_min_size = Vector2( 125, 0 )
+size_flags_horizontal = 4
 text = "Format"
+
+[node name="Singleton" type="CheckBox" parent="NewNameDialog/VBox"]
+margin_left = 81.0
+margin_top = 82.0
+margin_right = 168.0
+margin_bottom = 106.0
+size_flags_horizontal = 4
+text = "Singleton"
 
 [node name="Err" type="Label" parent="NewNameDialog/VBox"]
 visible = false
-margin_top = 82.0
+margin_top = 114.0
 margin_right = 250.0
-margin_bottom = 96.0
+margin_bottom = 128.0
 custom_colors/font_color = Color( 0.945098, 0.360784, 0.360784, 1 )
 text = "Name cannot be left blank"
 align = 1
@@ -190,6 +201,7 @@ margin_top = -249.5
 margin_right = 174.5
 margin_bottom = 221.5
 custom_constants/separation = 8
+alignment = 1
 
 [node name="NameLabel" type="Label" parent="ImportDialog/VBox"]
 margin_right = 349.0
@@ -204,10 +216,22 @@ margin_right = 349.0
 margin_bottom = 46.0
 
 [node name="Format" type="OptionButton" parent="ImportDialog/VBox"]
+margin_left = 112.0
 margin_top = 54.0
-margin_right = 349.0
+margin_right = 237.0
 margin_bottom = 74.0
+rect_min_size = Vector2( 125, 0 )
+size_flags_horizontal = 4
 text = "Format"
+
+[node name="Singleton" type="CheckBox" parent="ImportDialog/VBox"]
+margin_left = 131.0
+margin_top = 82.0
+margin_right = 218.0
+margin_bottom = 106.0
+size_flags_horizontal = 4
+text = "Singleton"
+align = 1
 
 [node name="Err" type="Label" parent="ImportDialog/VBox"]
 visible = false
@@ -219,7 +243,7 @@ text = "Name cannot be left blank"
 align = 1
 
 [node name="List" type="TextEdit" parent="ImportDialog/VBox"]
-margin_top = 82.0
+margin_top = 114.0
 margin_right = 349.0
 margin_bottom = 471.0
 size_flags_vertical = 3
